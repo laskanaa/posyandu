@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>@yield('title')</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0; font-family: Arial;">
+
+<body style="margin:0; font-family: Arial; min-height:100vh; display:flex; flex-direction:column;">
 
     @include('components.header')
 
-    <div style="padding:40px; text-align:center;">
+    <main style="flex:1; padding:20px;">
         @yield('content')
-    </div>
+    </main>
 
     @include('components.footer')
 
 </body>
+
 </html>
