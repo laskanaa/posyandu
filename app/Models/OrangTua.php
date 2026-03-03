@@ -12,4 +12,13 @@ class OrangTua extends Model
         'no_hp',
         'alamat'
     ];
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
+public function balitas()
+{
+    return $this->hasMany(Balita::class);
+}
 }

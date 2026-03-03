@@ -15,4 +15,8 @@ class Balita extends Model
         'tinggi_badan',
         'status'
     ];
+    public function orangTua()
+{
+    return $this->belongsTo(OrangTua::class);
+}
 }
