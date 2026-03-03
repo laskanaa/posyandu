@@ -2,24 +2,30 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User; // WAJIB ADA
+use Illuminate\Support\Facades\Hash; // WAJIB ADA
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::updateOrCreate(
+            ['email' => 'kader@app.com'],
+            [
+                'name' => 'Admin Kader',
+                'password' => Hash::make('12345678'),
+                'role' => 'kader'
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'ortu@app.com'],
+            [
+                'name' => 'Orang Tua',
+                'password' => Hash::make('12345678'),
+                'role' => 'orang_tua'
+            ]
+        );
     }
 }
