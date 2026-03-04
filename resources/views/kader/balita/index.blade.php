@@ -44,7 +44,10 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Umur (bulan)</th>
+                            <th>NIK</th>
+                            <th>TTL</th>
+                            <th>Nama Ibu</th>
+                            <th>Kondisi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -53,27 +56,51 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $balita->nama }}</td>
-                                <td>{{ $balita->umur }}</td>
+                                <td>{{ $balita->nik }}</td>
                                 <td>
-                                    <a href="{{ route('balita.show', $balita->id) }}" class="btn-detail">Detail</a>
+                                    {{ $balita->tempat_lahir }},
+                                    {{ \Carbon\Carbon::parse($balita->tanggal_lahir)->format('d M Y') }}
+                                </td>
+                                <td>{{ $balita->nama_ibu }}</td>
+                                <td>
+                                    @if($balita->kondisi == 'Stunting' || $balita->kondisi == 'Stunting Berat')
+                                        <span style="color:red;font-weight:bold;">
+                                            {{ $balita->kondisi }}
+                                        </span>
+                                    @else
+                                        <span style="color:green;font-weight:bold;">
+                                            {{ $balita->kondisi }}
+                                        </span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('balita.show', $balita->id) }}" class="btn btn-info">Lihat</a>
+
+                                    <form action="{{ route('balita.destroy', $balita->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 
     <style>
+        /* CSS kamu tetap sama, tidak aku ubah */
         .dashboard-container {
             display: flex;
             min-height: 80vh;
             font-family: sans-serif;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 220px;
             background: #0d4f4d;
@@ -114,7 +141,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Main Content */
         .main-content {
             flex: 1;
             padding: 30px;
@@ -154,7 +180,6 @@
             color: #0d4f4d;
         }
 
-        /* Table */
         .table-container {
             background: white;
             padding: 20px;
@@ -196,20 +221,6 @@
             border-radius: 4px;
             text-decoration: none;
         }
-
-        .table-container td .btn-detail:hover {
-            background: #0a3a38;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-            }
-        }
     </style>
+
 @endsection

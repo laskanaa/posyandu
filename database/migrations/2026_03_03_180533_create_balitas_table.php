@@ -9,16 +9,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('balitas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('orang_tua_id')->constrained('orang_tuas')->onDelete('cascade');
-            $table->string('nama');
-            $table->date('tanggal_lahir');
-            $table->string('jenis_kelamin');
-            $table->float('berat_badan')->nullable();
-            $table->float('tinggi_badan')->nullable();
-            $table->enum('status', ['normal', 'stunting'])->default('normal');
-            $table->timestamps();
-        });
+    $table->id();
+    $table->string('nama');
+    $table->string('nik')->unique();
+    $table->string('tempat_lahir');
+    $table->date('tanggal_lahir');
+    $table->string('nama_ibu');
+    $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+    $table->timestamps();
+    $table->string('jenis_kelamin');
+    $table->string('kondisi')->nullable();
+});
     }
 
     public function down(): void

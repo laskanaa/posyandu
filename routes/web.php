@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kader\DashboardController;
 use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PenimbanganController;
 
 // =====================
 // AUTH ROUTES
@@ -18,14 +19,28 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard Kader
-    Route::get('/dashboard/kader', [DashboardController::class, 'index'])->name('dashboard.kader');
+    Route::get('/dashboard/kader', [DashboardController::class, 'index'])
+        ->name('dashboard.kader');
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/kader/balita', [BalitaController::class, 'index'])->name('balita.index');
-    Route::get('/kader/balita/create', [BalitaController::class, 'create'])->name('balita.create');
-    Route::post('/kader/balita/store', [BalitaController::class, 'store'])->name('balita.store');
-    Route::get('/kader/balita/{id}', [BalitaController::class, 'show'])->name('balita.show');
+
+    // Balita Manual Routes
+    Route::get('/kader/balita', [BalitaController::class, 'index'])
+        ->name('balita.index');
+
+    Route::get('/kader/balita/create', [BalitaController::class, 'create'])
+        ->name('balita.create');
+
+    Route::post('/kader/balita/store', [BalitaController::class, 'store'])
+        ->name('balita.store');
+
+    Route::get('/kader/balita/{id}', [BalitaController::class, 'show'])
+        ->name('balita.show');
+
+    // Resource Routes
+    Route::resource('balita', BalitaController::class);
+    Route::resource('penimbangan', PenimbanganController::class);
 });
 
 // =====================

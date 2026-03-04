@@ -6,17 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Balita extends Model
 {
-    protected $fillable = [
-        'orang_tua_id',
-        'nama',
-        'tanggal_lahir',
-        'jenis_kelamin',
-        'berat_badan',
-        'tinggi_badan',
-        'status'
-    ];
-    public function orangTua()
+protected $fillable = [
+    'nama',
+    'nik',
+    'tempat_lahir',
+    'tanggal_lahir',
+    'nama_ibu',
+    'jenis_kelamin',
+    'kondisi',
+    'user_id'
+];
+
+public function penimbangans()
 {
-    return $this->belongsTo(OrangTua::class);
+    return $this->hasMany(Penimbangan::class);
+}
+
+public function user()
+{
+    return $this->belongsTo(User::class);
 }
 }

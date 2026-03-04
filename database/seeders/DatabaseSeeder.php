@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        $this->call([
+    StandarWhoSeeder::class,
+]);
+
         User::updateOrCreate(
             ['email' => 'ortu@app.com'],
             [
