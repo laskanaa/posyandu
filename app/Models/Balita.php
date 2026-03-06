@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Balita extends Model
 {
+
 protected $fillable = [
     'nama',
     'nik',
@@ -17,6 +18,7 @@ protected $fillable = [
     'user_id'
 ];
 
+
 public function penimbangans()
 {
     return $this->hasMany(Penimbangan::class);
@@ -26,4 +28,5 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
+
 }

@@ -73,13 +73,13 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="action-buttons">
 
-                                    <a href="{{ route('balita.show', $balita->id) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('balita.show', $balita->id) }}" class="btn btn-view">
                                         Lihat
                                     </a>
 
-                                    <a href="{{ route('balita.edit', $balita->id) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('balita.edit', $balita->id) }}" class="btn btn-edit">
                                         Edit
                                     </a>
 
@@ -88,8 +88,8 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin mau hapus data balita ini?')">
+                                        <button type="submit" class="btn btn-delete"
+                                            onclick="return confirm('Yakin ingin menghapus data balita ini?')">
                                             Hapus
                                         </button>
                                     </form>
@@ -230,6 +230,46 @@
             color: white;
             border-radius: 4px;
             text-decoration: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-view {
+            background: #27ae60;
+        }
+
+        .btn-view:hover {
+            background: #1e874b;
+        }
+
+        .btn-edit {
+            background: #f1c40f;
+            color: #333;
+        }
+
+        .btn-edit:hover {
+            background: #d4ac0d;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+        }
+
+        .btn-delete:hover {
+            background: #c0392b;
         }
     </style>
 
