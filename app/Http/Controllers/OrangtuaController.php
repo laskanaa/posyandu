@@ -15,5 +15,9 @@ class OrangtuaController extends Controller
         $balita = Balita::where('email_ortu', $user->email)->first();
 
         return view('orangtua.dashboard', compact('balita'));
+
+        $balita = Balita::with(['penimbangans' => function($q){
+    $q->orderBy('tanggal_penimbangan', 'desc');
+}])->where('user_id', auth()->id())->first();
     }
 }

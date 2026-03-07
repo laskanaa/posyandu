@@ -66,57 +66,41 @@
                     <tbody>
                         @foreach($balitas as $index => $balita)
                             <tr>
-
-                                <td>{{ $index + 1 }}</td>
+                                <td class="nomor">{{ $index + 1 }}</td>
 
                                 <td>{{ $balita->nama }}</td>
 
-                                <td class="nik">
-                                    {{ $balita->nik }}
-                                </td>
+                                <td class="nik">{{ $balita->nik }}</td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($balita->tanggal_lahir)->diffInMonths(\Carbon\Carbon::now()) }}
-                                    Bulan
+                                    @php
+                                        $tanggalLahir = \Carbon\Carbon::parse($balita->tanggal_lahir);
+                                        $umurBulan = $tanggalLahir->diffInDays(\Carbon\Carbon::now()) / 30;
+                                        $umurBulan = round($umurBulan * 2) / 2; // dibulatkan ke 0,5 bulan
+                                    @endphp
+                                    {{ $umurBulan }} Bulan
                                 </td>
 
                                 <td>{{ $balita->nama_ibu }}</td>
 
                                 <td>
                                     @if($balita->kondisi == 'Stunting' || $balita->kondisi == 'Stunting Berat')
-                                        <span class="status-stunting">
-                                            {{ $balita->kondisi }}
-                                        </span>
+                                        <span class="status-stunting">{{ $balita->kondisi }}</span>
                                     @else
-                                        <span class="status-normal">
-                                            {{ $balita->kondisi }}
-                                        </span>
+                                        <span class="status-normal">{{ $balita->kondisi }}</span>
                                     @endif
                                 </td>
 
                                 <td class="action-buttons">
-
-                                    <a href="{{ route('balita.show', $balita->id) }}" class="btn btn-view">
-                                        Lihat
-                                    </a>
-
-                                    <a href="{{ route('balita.edit', $balita->id) }}" class="btn btn-edit">
-                                        Edit
-                                    </a>
-
+                                    <a href="{{ route('balita.show', $balita->id) }}" class="btn btn-view">Lihat</a>
+                                    <a href="{{ route('balita.edit', $balita->id) }}" class="btn btn-edit">Edit</a>
                                     <form action="{{ route('balita.destroy', $balita->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-
                                         <button type="submit" class="btn btn-delete"
-                                            onclick="return confirm('Yakin ingin menghapus data balita ini?')">
-                                            Hapus
-                                        </button>
-
+                                            onclick="return confirm('Yakin ingin menghapus data balita ini?')">Hapus</button>
                                     </form>
-
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -271,6 +255,13 @@
             color: white;
         }
 
+        /* Kolom No kecil */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 40px;
+            text-align: center;
+        }
+
         /* Lebarin kolom nama */
         th:nth-child(2),
         td:nth-child(2) {
@@ -327,5 +318,4 @@
             font-weight: bold;
         }
     </style>
-
 @endsection

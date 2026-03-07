@@ -119,7 +119,8 @@
 
                         <div class="form-group">
                             <label>Tanggal Penimbangan</label>
-                            <input type="date" name="tanggal_penimbangan" required>
+                            <input type="date" name="tanggal_penimbangan"
+                                value="{{ old('tanggal_penimbangan', $penimbangan->tanggal_penimbangan ?? '') }}">
                         </div>
 
                         <div class="form-group">
@@ -140,6 +141,12 @@
                         <div class="form-group">
                             <label>LIKA (cm)</label>
                             <input type="number" step="0.01" name="lika" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pesan">Pesan dari Kader</label>
+                            <textarea name="pesan" id="pesan" class="form-control" rows="3"
+                                placeholder="Isi pesan untuk orang tua...">{{ old('pesan', $penimbangan->pesan ?? '') }}</textarea>
                         </div>
 
                     </div>
