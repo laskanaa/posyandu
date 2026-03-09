@@ -71,6 +71,11 @@
                     <div class="form-grid">
 
                         <div class="form-group">
+                            <label>Tanggal Penimbangan</label>
+                            <input type="date" name="tanggal_penimbangan" required>
+                        </div>
+
+                        <div class="form-group">
                             <label>Berat Badan (kg)</label>
                             <input type="number" name="berat_badan" step="any" required>
                         </div>
@@ -93,7 +98,6 @@
                     </div>
 
                 </div>
-
                 <button type="submit" class="btn-save">
                     Simpan Data Balita
                 </button>

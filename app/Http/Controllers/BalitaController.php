@@ -9,6 +9,9 @@ use App\Models\Penimbangan;
 use Illuminate\Support\Facades\Hash;
 use App\Models\StandarWhoTbu;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class BalitaController extends Controller
 {
@@ -29,6 +32,15 @@ class BalitaController extends Controller
 
         return view('kader.balita.index', compact('balitas'));
     }
+
+
+    // DASHBOARD ORANG TUA
+    public function dashboard()
+{
+    $balita = Balita::where('user_id', Auth::id())->first();
+
+    return view('orangtua.dashboard', compact('balita'));
+}
 
     // =========================
     // CREATE

@@ -20,18 +20,8 @@
 
             <div class="cards">
                 <div class="card">
-                    <h4>Total Balita</h4>
-                    <p>{{ $totalBalita }}</p>
-                </div>
-
-                <div class="card">
-                    <h4>Total Orang Tua</h4>
-                    <p>{{ $totalOrangTua }}</p>
-                </div>
-
-                <div class="card">
                     <h4>Data Stunting</h4>
-                    <p>{{ $totalStunting }}</p>
+                    <p>{{ $totalBalita }}</p>
                 </div>
             </div>
 

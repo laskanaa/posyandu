@@ -16,6 +16,10 @@ protected $fillable = [
     'lika'
 ];
 
+protected $casts = [
+    'tanggal_penimbangan' => 'date'
+];
+
 public function balita()
 {
     return $this->belongsTo(Balita::class);

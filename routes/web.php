@@ -21,11 +21,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // HOME ROUTE
 // =====================
 Route::get('/', function () {
-
     $sliders = Slider::all();
-
     return view('pages.home', compact('sliders'));
-
 });
 
 

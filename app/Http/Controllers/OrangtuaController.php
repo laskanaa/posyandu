@@ -11,13 +11,10 @@ class OrangtuaController extends Controller
     {
         $user = Auth::user();
 
-        // ambil data balita berdasarkan email orang tua
-        $balita = Balita::where('email_ortu', $user->email)->first();
+        $balita = Balita::with(['penimbangans' => function($q){
+            $q->orderBy('tanggal_penimbangan','asc');
+        }])->where('user_id', $user->id)->first();
 
         return view('orangtua.dashboard', compact('balita'));
-
-        $balita = Balita::with(['penimbangans' => function($q){
-    $q->orderBy('tanggal_penimbangan', 'desc');
-}])->where('user_id', auth()->id())->first();
     }
 }

@@ -4,46 +4,85 @@
 
 @section('content')
 
-    <div class="login-container">
+    <div class="login-wrapper">
 
-        <h2>Login Sistem Monitoring Posyandu</h2>
+        <div class="login-container">
 
-        <div class="role-selection">
-            <button onclick="selectRole('kader')" id="btn-kader">Kader Posyandu</button>
-            <button onclick="selectRole('ortu')" id="btn-ortu">Orang Tua</button>
+            <h2 class="login-title">
+                Login Sistem Monitoring Posyandu
+            </h2>
+
+            <p class="login-subtitle">
+                Silakan pilih peran terlebih dahulu
+            </p>
+
+            <div class="role-selection">
+
+                <button type="button" onclick="selectRole('kader')" id="btn-kader" class="role-btn">
+
+                    Kader Posyandu
+
+                </button>
+
+                <button type="button" onclick="selectRole('ortu')" id="btn-ortu" class="role-btn">
+
+                    Orang Tua
+
+                </button>
+
+            </div>
+
+            <form method="POST" action="#">
+                @csrf
+
+                <input type="hidden" name="role" id="role">
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Masukkan email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Masukkan password" required>
+                </div>
+
+                <button type="submit" id="login-btn" class="login-btn">
+                    Login
+                </button>
+
+            </form>
+
         </div>
-
-        <form method="POST" action="#">
-            @csrf
-            <input type="hidden" name="role" id="role">
-
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
-            </div>
-
-            <button type="submit" class="login-btn">Login</button>
-        </form>
 
     </div>
 
+
     <style>
-        .login-container {
-            max-width: 400px;
-            margin: 60px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            text-align: center;
+        .login-wrapper {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .login-container h2 {
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .login-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: #777;
             margin-bottom: 25px;
         }
 
@@ -53,24 +92,38 @@
             margin-bottom: 25px;
         }
 
-        .role-selection button {
+        .role-btn {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            background: #e0e0e0;
+            background: #e5e7eb;
+            font-weight: 500;
             transition: 0.3s;
         }
 
-        .role-selection button.active {
+        /* kader aktif */
+
+        .role-btn.kader-active {
             background: #0d4f4d;
+            color: white;
+        }
+
+        /* ortu aktif */
+
+        .role-btn.ortu-active {
+            background: #2563eb;
             color: white;
         }
 
         .form-group {
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            font-size: 14px;
         }
 
         .form-group input {
@@ -78,6 +131,7 @@
             padding: 10px;
             border-radius: 6px;
             border: 1px solid #ccc;
+            margin-top: 5px;
         }
 
         .login-btn {
@@ -89,26 +143,45 @@
             border-radius: 8px;
             margin-top: 10px;
             cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
         }
 
         .login-btn:hover {
-            background: #0a3c3a;
+            opacity: 0.9;
         }
     </style>
 
+
     <script>
+
         function selectRole(role) {
+
             document.getElementById('role').value = role;
 
-            document.getElementById('btn-kader').classList.remove('active');
-            document.getElementById('btn-ortu').classList.remove('active');
+            let kaderBtn = document.getElementById('btn-kader');
+            let ortuBtn = document.getElementById('btn-ortu');
+            let loginBtn = document.getElementById('login-btn');
+
+            kaderBtn.classList.remove('kader-active');
+            ortuBtn.classList.remove('ortu-active');
 
             if (role === 'kader') {
-                document.getElementById('btn-kader').classList.add('active');
+
+                kaderBtn.classList.add('kader-active');
+
+                loginBtn.style.background = "#0d4f4d";
+
             } else {
-                document.getElementById('btn-ortu').classList.add('active');
+
+                ortuBtn.classList.add('ortu-active');
+
+                loginBtn.style.background = "#2563eb";
+
             }
+
         }
+
     </script>
 
 @endsection
