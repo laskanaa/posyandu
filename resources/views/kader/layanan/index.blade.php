@@ -33,7 +33,6 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="icon-cell">
-                                    {{-- Revisi: langsung tampilkan emoji --}}
                                     @if($layanan->icon)
                                         <span class="emoji-icon">{{ $layanan->icon }}</span>
                                     @else
